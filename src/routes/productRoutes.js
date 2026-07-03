@@ -4,9 +4,11 @@ import { updateProductController } from "../controllers/updateProductController.
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 import { deleteProductController } from "../controllers/deleteProductController.js";
 import adminOnly from "../middlewares/adminOnly.js";
+import { getProductsController } from "../controllers/getProductsController.js";
 const router = express.Router();
 
 router.post("/", authMiddleware, adminOnly, addProductController);
 router.put("/:id", authMiddleware, updateProductController);
 router.delete("/:id", authMiddleware, deleteProductController);
+router.get("/", getProductsController);
 export default router;

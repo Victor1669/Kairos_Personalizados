@@ -38,6 +38,20 @@ export const addressRegisterService = async (data) => {
     throw new Error("CEP_NOT_FOUND");
   }
 
+  const addressAlreadyExists = await enderecoRepository.findOne({
+    where: {
+      rua: endereco.logradouro,
+      numero,
+      user: {
+        id: userId,
+      },
+    },
+  });
+
+  if (addressAlreadyExists) {
+    throw new Error("ADDRESS_ALREADY_EXISTS");
+  }
+
   const novoEndereco = enderecoRepository.create({
     rua: endereco.logradouro,
     bairro: endereco.bairro,

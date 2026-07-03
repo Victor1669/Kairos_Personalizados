@@ -8,6 +8,8 @@ import loginRoutes from "./src/routes/loginRoutes.js";
 import addressRoutes from "./src/routes/addressRoutes.js";
 import ProductRoutes from "./src/routes/ProductRoutes.js";
 import UpdateUserRoutes from "./src/routes/updateUserRoutes.js";
+import UpdateAddressRoutes from "./src/routes/updateAddressRoutes.js";
+
 dotenv.config();
 
 const app = express();
@@ -21,6 +23,7 @@ app.use("/auth", loginRoutes);
 app.use("/addresses", addressRoutes);
 app.use("/products", ProductRoutes);
 app.use("/users", UpdateUserRoutes);
+app.use("/addresses", UpdateAddressRoutes);
 
 const PORT = process.env.PORT;
 

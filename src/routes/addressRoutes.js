@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addressRegisterController } from "../controllers/AddressRegisterController.js";
+import { addressRegisterController } from "../controllers/addressRegisterController.js";
 import { updateAddressController } from "../controllers/updateAddressController.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 

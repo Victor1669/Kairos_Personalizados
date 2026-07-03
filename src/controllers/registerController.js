@@ -1,4 +1,4 @@
-import { registerService } from "../services/UserRegisterService.js";
+import { registerService } from "../services/userRegisterService.js";
 import { isValidCPF } from "../utils/isValidCPF.js";
 
 export const registerController = async (req, res) => {

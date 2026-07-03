@@ -1,4 +1,4 @@
-import { addProductService } from "../services/AddProductService.js";
+import { addProductService } from "../services/addProductService.js";
 import AppDataSource from "../config/dbconnect.js";
 export const addProductController = async (req, res) => {
   try {

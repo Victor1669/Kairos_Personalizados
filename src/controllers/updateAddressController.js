@@ -1,4 +1,4 @@
-import { updateAddressService } from "../services/UpdateAddressService.js";
+import { updateAddressService } from "../services/updateAddressService.js";
 
 export const updateAddressController = async (req, res) => {
   try {

@@ -1,4 +1,4 @@
-import { addressRegisterService } from "../services/AddressRegisterService.js";
+import { addressRegisterService } from "../services/addressRegisterService.js";
 export const addressRegisterController = async (req, res) => {
   try {
     const { cep, numero, complemento } = req.body;

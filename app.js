@@ -2,14 +2,10 @@ import express from "express";
 import dotenv from "dotenv";
 
 import AppDataSource from "./src/config/dbconnect.js";
-
-import registerRoutes from "./src/routes/registerRoutes.js";
-import loginRoutes from "./src/routes/loginRoutes.js";
+import authRoutes from "./src/routes/authRoutes.js";
+import userRoutes from "./src/routes/userRoutes.js";
+import productRoutes from "./src/routes/productRoutes.js";
 import addressRoutes from "./src/routes/addressRoutes.js";
-import ProductRoutes from "./src/routes/ProductRoutes.js";
-import UpdateUserRoutes from "./src/routes/updateUserRoutes.js";
-import UpdateAddressRoutes from "./src/routes/updateAddressRoutes.js";
-
 dotenv.config();
 
 const app = express();
@@ -17,13 +13,10 @@ const app = express();
 app.use(express.json());
 
 // Rotas
-
-app.use("/auth", registerRoutes);
-app.use("/auth", loginRoutes);
+app.use("/auth", authRoutes);
+app.use("/users", userRoutes);
 app.use("/addresses", addressRoutes);
-app.use("/products", ProductRoutes);
-app.use("/users", UpdateUserRoutes);
-app.use("/addresses", UpdateAddressRoutes);
+app.use("/products", productRoutes);
 
 const PORT = process.env.PORT;
 

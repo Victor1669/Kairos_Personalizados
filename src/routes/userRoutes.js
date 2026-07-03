@@ -4,6 +4,6 @@ import { updateUserController } from "../controllers/updateUserController.js";
 
 const router = Router();
 
-router.put("/user", authMiddleware, updateUserController);
+router.put("/", authMiddleware, updateUserController);
 
 export default router;

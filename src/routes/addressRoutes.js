@@ -1,9 +1,11 @@
-import express from "express";
+import { Router } from "express";
 import { addressRegisterController } from "../controllers/AddressRegisterController.js";
+import { updateAddressController } from "../controllers/updateAddressController.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 
-const router = express();
+const router = Router();
 
-router.post("/address", authMiddleware, addressRegisterController);
+router.post("/", authMiddleware, addressRegisterController);
+router.put("/", authMiddleware, updateAddressController);
 
 export default router;

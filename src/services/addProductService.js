@@ -1,11 +1,22 @@
 import AppDataSource from "../config/dbconnect.js";
 import Produto from "../model/Product.js";
+import ProductImg from "../model/ProductImg.js";
+
 export const addProductService = async (data) => {
   const productRepository = AppDataSource.getRepository(Produto);
+  const imageRepository = AppDataSource.getRepository(ProductImg);
 
-  const { nome, color, size, price, description } = data;
+  const { nome, color, size, price, description, imageUrl, publicId } = data;
 
-  if (!nome || !color || !size || !price || !description) {
+  if (
+    !nome ||
+    !color ||
+    !size ||
+    !price ||
+    !description ||
+    !imageUrl ||
+    !publicId
+  ) {
     throw new Error("ALL_FIELDS_REQUIRED");
   }
 
@@ -16,6 +27,7 @@ export const addProductService = async (data) => {
     where: {},
     order: { id: "DESC" },
   });
+
   const lastNumber = lastProduct
     ? parseInt(lastProduct.code.replace("PRD", "")) + 1
     : 1;
@@ -32,6 +44,15 @@ export const addProductService = async (data) => {
   });
 
   await productRepository.save(product);
+
+  const image = imageRepository.create({
+    img_url: imageUrl,
+    public_id: publicId,
+    order: 1,
+    product,
+  });
+
+  await imageRepository.save(image);
 
   return product;
 };

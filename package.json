@@ -7,9 +7,9 @@
   "scripts": {
     "start": "node app.js",
     "typeorm": "typeorm",
-    "migration:create": "npm run typeorm -- migration:create",
+    "migration:create": "npx typeorm migration:create ./src/migrations/AddOrdersTable -o",
     "migration:generate": "npm run typeorm -- -d src/config/dbconnect.js migration:generate src/migrations",
-    "migration:run": "npm run typeorm -- -d src/config/dbconnect.js migration:run",
+    "migration:run": "npx typeorm migration:run -d ./src/config/dbconnect.js",
     "migration:revert": "npm run typeorm -- -d src/config/dbconnect.js migration:revert",
     "migration:show": "npm run typeorm -- -d src/config/dbconnect.js migration:show"
   },

@@ -10,6 +10,8 @@ export const addProductService = async (data) => {
   }
 
   const sizes = Array.isArray(size) ? size : [size];
+  const colors = Array.isArray(color) ? color : [color];
+
   const lastProduct = await productRepository.findOne({
     where: {},
     order: { id: "DESC" },
@@ -22,7 +24,7 @@ export const addProductService = async (data) => {
 
   const product = productRepository.create({
     nome,
-    color,
+    color: colors,
     size: sizes,
     price,
     description,

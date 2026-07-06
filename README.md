@@ -37,22 +37,28 @@ A ideia central é conectar criatividade com personalização real de produtos.
 └── Kairos/
     ├── src/
     │   ├── config
+    │   ├── middlewares
     │   ├── auth
     │   ├── controllers
     │   ├── migrations
     │   ├── model
     │   ├── routes
     │   ├── services
-    │   └── util
+    │   └── utils
     └──app.js
 ```
-## Como funciona
+## Padrão de Commits
 
-1. O usuário acessa a plataforma  
-2. Escolhe um produto (ex: caneca)  
-3. Faz upload da sua arte ou imagem  
-4. Finaliza o pedido  
-5. O sistema salva os dados para produção  
+Este projeto segue o padrão de Convencional Commits.
+
+```bash
+| Tipo    |Descrição                   |  
+| feat    | Nova funcionalidade        |
+| fix     | Correção de bugs           |
+| docs    | Alterações na documentação |
+| refactor| Refatoração de código      |
+| perf    | Melhoria de performance    |
+ ```  
 
 ---
 

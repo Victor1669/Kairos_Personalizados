@@ -34,6 +34,7 @@ export const registerService = async (data) => {
   if (phoneExists) {
     throw new Error("PHONE_ALREADY_ENTERED");
   }
+
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const newUser = userRepository.create({
@@ -46,7 +47,7 @@ export const registerService = async (data) => {
 
   await userRepository.save(newUser);
 
-  const { password: _, ...userWithoutPassword } = newUser;
-
-  return userWithoutPassword;
+  return {
+    message: "Usuário cadastrado com sucesso.",
+  };
 };

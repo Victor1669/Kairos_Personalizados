@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-
+import cors from "cors";
 import AppDataSource from "./src/config/dbconnect.js";
 import authRoutes from "./src/routes/authRoutes.js";
 import userRoutes from "./src/routes/userRoutes.js";
@@ -9,8 +9,8 @@ import addressRoutes from "./src/routes/addressRoutes.js";
 dotenv.config();
 
 const app = express();
-
 app.use(express.json());
+app.use(cors());
 
 // Rotas
 app.use("/auth", authRoutes);

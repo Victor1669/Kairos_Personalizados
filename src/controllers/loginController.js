@@ -7,7 +7,7 @@ export const loginController = async (req, res) => {
     const result = await loginService({ email, password });
 
     return res.status(200).json({
-      message: "LOGIN_SUCESS",
+      message: "Login realizado com sucesso.",
       data: result,
     });
   } catch (err) {

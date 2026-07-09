@@ -17,7 +17,7 @@ export const addProductService = async (data) => {
     !imageUrl ||
     !publicId
   ) {
-    throw new Error("ALL_FIELDS_REQUIRED");
+    throw new Error("Todos os campos devem ser preenchidos.");
   }
 
   const sizes = Array.isArray(size) ? size : [size];

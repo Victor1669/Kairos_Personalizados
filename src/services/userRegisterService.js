@@ -8,7 +8,7 @@ export const registerService = async (data) => {
   const { name, email, password, cpf, phone } = data;
 
   if (!name || !email || !password || !cpf || !phone) {
-    throw new Error("ALL_FIELDS_REQUIRED");
+    throw new Error("Todos os campos devem ser preenchidos.");
   }
 
   const emailExists = await userRepository.findOne({
@@ -16,7 +16,7 @@ export const registerService = async (data) => {
   });
 
   if (emailExists) {
-    throw new Error("EMAIL_ALREADY_EXISTS");
+    throw new Error("Este e-mail já está cadastrado.");
   }
 
   const cpfExists = await userRepository.findOne({
@@ -24,7 +24,7 @@ export const registerService = async (data) => {
   });
 
   if (cpfExists) {
-    throw new Error("CPF_ALREADY_EXISTS");
+    throw new Error("Este CPF já está cadastrado.");
   }
 
   const phoneExists = await userRepository.findOne({
@@ -32,7 +32,7 @@ export const registerService = async (data) => {
   });
 
   if (phoneExists) {
-    throw new Error("PHONE_ALREADY_ENTERED");
+    throw new Error("Este telefone já está cadastrado.");
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);

@@ -9,7 +9,7 @@ export const addressRegisterService = async (data) => {
   const { cep, numero, complemento, userId } = data;
 
   if (!cep || !numero) {
-    throw new Error("ALL_FIELDS_MUST_BE_FILLED");
+    throw new Error("CEP e número são obrigatórios.");
   }
 
   const userExists = await userRepository.findOne({
@@ -17,25 +17,25 @@ export const addressRegisterService = async (data) => {
   });
 
   if (!userExists) {
-    throw new Error("USER_NOT_FOUND");
+    throw new Error("Usuário não encontrado.");
   }
 
   const cepLimpo = cep.replace(/\D/g, "");
 
   if (cepLimpo.length !== 8) {
-    throw new Error("INVALID_CEP");
+    throw new Error("CEP inválido.");
   }
 
   const response = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
 
   if (!response.ok) {
-    throw new Error("VIACEP_ERROR");
+    throw new Error("Erro ao consultar o CEP.");
   }
 
   const endereco = await response.json();
 
   if (endereco.erro) {
-    throw new Error("CEP_NOT_FOUND");
+    throw new Error("CEP não encontrado.");
   }
 
   const addressAlreadyExists = await enderecoRepository.findOne({
@@ -49,7 +49,7 @@ export const addressRegisterService = async (data) => {
   });
 
   if (addressAlreadyExists) {
-    throw new Error("ADDRESS_ALREADY_EXISTS");
+    throw new Error("Este endereço já está cadastrado.");
   }
 
   const novoEndereco = enderecoRepository.create({

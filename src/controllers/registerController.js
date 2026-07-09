@@ -10,35 +10,35 @@ export const registerController = async (req, res) => {
     // valida campos obrigatórios
     if (!name || !email || !password || !cpf || !phone) {
       return res.status(400).json({
-        message: "NOME, EMAIL, SENHA, CPF e TELEFONE são obrigatórios",
+        message: "Nome, e-mail, senha, CPF e telefone são obrigatórios.",
       });
     }
 
     // valida email
     if (!emailRegex.test(email)) {
       return res.status(400).json({
-        message: "Email não segue o formato padrão!",
+        message: "E-mail inválido.",
       });
     }
 
     // valida senha
     if (password.length < 8) {
       return res.status(400).json({
-        message: "A senha deve ter no mínimo 8 caracteres",
+        message: "A senha deve ter no mínimo 8 caracteres.",
       });
     }
 
     // valida telefone
     if (phone.length < 9) {
       return res.status(400).json({
-        message: "Telefone não segue o formato padrão!",
+        message: "Telefone inválido.",
       });
     }
 
     // valida CPF
     if (!isValidCPF(cpf)) {
       return res.status(400).json({
-        message: "CPF inválido",
+        message: "CPF inválido.",
       });
     }
 
@@ -53,16 +53,10 @@ export const registerController = async (req, res) => {
 
     return res.status(201).json(user);
   } catch (error) {
-    console.log("REGISTER ERROR:", error);
+    console.error("REGISTER ERROR:", error);
 
-    if (error.message === "EMAIL_ALREADY_EXISTS") {
-      return res.status(409).json({
-        message: "Email já cadastrado",
-      });
-    }
-
-    return res.status(500).json({
-      message: error.message || "Erro interno no servidor",
+    return res.status(400).json({
+      message: error.message,
     });
   }
 };

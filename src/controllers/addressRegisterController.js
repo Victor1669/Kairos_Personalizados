@@ -1,4 +1,5 @@
 import { addressRegisterService } from "../services/addressRegisterService.js";
+
 export const addressRegisterController = async (req, res) => {
   try {
     const { cep, numero, complemento } = req.body;
@@ -13,7 +14,7 @@ export const addressRegisterController = async (req, res) => {
     });
 
     return res.status(201).json({
-      message: "ADDRESS_REGISTERED_SUCCESSFULLY",
+      message: "Endereço cadastrado com sucesso.",
       data: result,
     });
   } catch (err) {

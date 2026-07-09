@@ -9,7 +9,7 @@ export const loginService = async (data) => {
   const { email, password } = data;
 
   if (!email || !password) {
-    throw new Error("ALL_FIELDS_MUST_BE_FILLED");
+    throw new Error("Todos os campos devem ser preenchidos.");
   }
 
   const user = await userRepository.findOne({
@@ -17,14 +17,15 @@ export const loginService = async (data) => {
   });
 
   if (!user) {
-    throw new Error("EMAIL_DOES_NOT_EXISTS");
+    throw new Error("E-mail ou senha inválidos.");
   }
 
   const isCorrectPassword = await bcrypt.compare(password, user.password);
 
   if (!isCorrectPassword) {
-    throw new Error("INCORRECT_PASSWORD");
+    throw new Error("E-mail ou senha inválidos.");
   }
+
   const token = jwt.sign(
     {
       id: user.id,
@@ -32,8 +33,11 @@ export const loginService = async (data) => {
       role: user.role,
     },
     process.env.JWT_SECRET,
-    { expiresIn: "1d" },
+    {
+      expiresIn: "1d",
+    },
   );
+
   return {
     token,
     user: {

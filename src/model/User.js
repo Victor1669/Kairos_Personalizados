@@ -42,5 +42,10 @@ export default new EntitySchema({
       target: "Endereco",
       inverseSide: "user",
     },
+    carts: {
+      type: "one-to-many",
+      target: "Cart",
+      inverseSide: "user",
+    },
   },
 });

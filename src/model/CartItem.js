@@ -3,46 +3,53 @@ import { EntitySchema } from "typeorm";
 export default new EntitySchema({
   name: "CartItem",
   tableName: "cart_items",
+
   columns: {
     id: {
       primary: true,
       type: "int",
       generated: true,
     },
+
     quantity: {
       type: "int",
       default: 1,
     },
+
     unit_price: {
       type: "decimal",
       precision: 10,
       scale: 2,
     },
+
     color: {
       type: "varchar",
+      nullable: true,
     },
+
     size: {
       type: "varchar",
+      nullable: true,
     },
-    art_url: {
-      type: "varchar",
-      nullable: true, // nem todo produto precisa de arte customizada
-    },
+
     created_at: {
       type: "timestamp",
       createDate: true,
     },
+
     updated_at: {
       type: "timestamp",
       updateDate: true,
     },
   },
+
   uniques: [
     {
       name: "uk_cart_product_variant",
-      columns: ["cart", "product", "color", "size", "art_url"],
+      columns: ["cart", "product", "color", "size"],
     },
   ],
+
   relations: {
     cart: {
       type: "many-to-one",
@@ -50,6 +57,7 @@ export default new EntitySchema({
       joinColumn: true,
       inverseSide: "items",
     },
+
     product: {
       type: "many-to-one",
       target: "Product",

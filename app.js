@@ -7,6 +7,7 @@ import userRoutes from "./src/routes/userRoutes.js";
 import productRoutes from "./src/routes/productRoutes.js";
 import addressRoutes from "./src/routes/addressRoutes.js";
 import cartRoutes from "./src/routes/cartRoutes.js";
+import reviewRoutes from "./src/routes/reviewRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -19,6 +20,7 @@ app.use("/users", userRoutes);
 app.use("/addresses", addressRoutes);
 app.use("/products", productRoutes);
 app.use("/cart", cartRoutes);
+app.use("/review", reviewRoutes);
 
 const PORT = process.env.PORT;
 

@@ -20,5 +20,11 @@ export default new EntitySchema({
       target: "ProductImg",
       inverseSide: "product",
     },
+
+    reviews: {
+      type: "one-to-many",
+      target: "Review",
+      inverseSide: "product",
+    },
   },
 });

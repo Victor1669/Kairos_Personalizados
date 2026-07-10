@@ -47,5 +47,10 @@ export default new EntitySchema({
       target: "Cart",
       inverseSide: "user",
     },
+    reviews: {
+      type: "one-to-many",
+      target: "Review",
+      inverseSide: "user",
+    },
   },
 });

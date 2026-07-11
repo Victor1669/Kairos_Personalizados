@@ -16,6 +16,7 @@ export default new EntitySchema({
       target: "Product",
       joinColumn: true,
       inverseSide: "images",
+      onDelete: "CASCADE",
     },
   },
 });

@@ -1,16 +1,25 @@
 import AppDataSource from "../config/dbconnect.js";
 import Product from "../model/Product.js";
 
-export const getProductsService = async () => {
+export const getProductByIdService = async (id) => {
   const productRepository = AppDataSource.getRepository(Product);
 
-  const products = await productRepository.find({
+  const product = await productRepository.findOne({
+    where: {
+      id: Number(id),
+    },
     relations: {
       images: true,
     },
   });
 
-  return products.map((product) => ({
+  if (!product) {
+    throw new Error("Produto não encontrado.");
+  }
+
+  product.images.sort((a, b) => a.order - b.order);
+
+  return {
     id: product.id,
     nome: product.nome,
     color: product.color,
@@ -18,6 +27,6 @@ export const getProductsService = async () => {
     code: product.code,
     size: product.size,
     price: product.price,
-    image: product.images.sort((a, b) => a.order - b.order)[0]?.img_url ?? null,
-  }));
+    images: product.images,
+  };
 };

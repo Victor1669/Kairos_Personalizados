@@ -52,5 +52,10 @@ export default new EntitySchema({
       target: "Review",
       inverseSide: "user",
     },
+    refreshTokens: {
+      target: "RefreshToken",
+      type: "one-to-many",
+      inverseSide: "user",
+    },
   },
 });

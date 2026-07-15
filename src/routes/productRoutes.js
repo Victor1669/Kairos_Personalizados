@@ -20,7 +20,13 @@ router.post(
   upload.single("image"),
   addProductController,
 );
-router.put("/:id", authMiddleware, adminOnly, updateProductController);
+router.put(
+  "/:id",
+  authMiddleware,
+  adminOnly,
+  upload.single("image"),
+  updateProductController,
+);
 router.delete("/:id", authMiddleware, adminOnly, deleteProductController);
 router.get(
   "/code/:code",

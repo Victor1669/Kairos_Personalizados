@@ -1,5 +1,6 @@
 import AppDataSource from "../config/dbconnect.js";
 import Produto from "../model/Product.js";
+import ProductImg from "../model/ProductImg.js";
 
 export const deleteProductService = async (user, productId) => {
   if (user.role !== "admin") {
@@ -9,16 +10,21 @@ export const deleteProductService = async (user, productId) => {
   const productRepository = AppDataSource.getRepository(Produto);
 
   const product = await productRepository.findOne({
-    where: {
-      id: productId,
-    },
+    where: { id: productId },
   });
 
   if (!product) {
     throw new Error("Produto não encontrado.");
   }
 
-  await productRepository.remove(product);
+  await AppDataSource.transaction(async (manager) => {
+    await manager.getRepository(ProductImg).delete({
+      product: {
+        id: productId,
+      },
+    });
+    await manager.getRepository(Produto).remove(product);
+  });
 
   return {
     message: "Produto deletado com sucesso.",

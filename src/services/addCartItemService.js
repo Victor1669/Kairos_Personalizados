@@ -2,8 +2,9 @@ import AppDataSource from "../config/dbconnect.js";
 import Product from "../model/Product.js";
 import User from "../model/User.js";
 import Cart from "../model/Cart.js";
-import { createCartService } from "../services/createCartService.js";
 import CartItem from "../model/CartItem.js";
+import { createCartService } from "./createCartService.js";
+
 export const addCartItemService = async (
   userId,
   productId,
@@ -17,9 +18,7 @@ export const addCartItemService = async (
   const cartItemRepository = AppDataSource.getRepository(CartItem);
 
   const user = await userRepository.findOne({
-    where: {
-      id: userId,
-    },
+    where: { id: userId },
   });
 
   if (!user) {
@@ -27,9 +26,7 @@ export const addCartItemService = async (
   }
 
   const product = await productRepository.findOne({
-    where: {
-      id: productId,
-    },
+    where: { id: productId },
   });
 
   if (!product) {
@@ -41,7 +38,10 @@ export const addCartItemService = async (
       user: {
         id: userId,
       },
-      status: "active",
+      status: "ativo",
+    },
+    relations: {
+      user: true,
     },
   });
 
@@ -72,6 +72,7 @@ export const addCartItemService = async (
       cartItem: existingCartItem,
     };
   }
+
   const cartItem = cartItemRepository.create({
     cart,
     product,
@@ -80,10 +81,11 @@ export const addCartItemService = async (
     quantity,
     unit_price: product.price,
   });
+
   await cartItemRepository.save(cartItem);
 
   return {
-    message: "Produto adicionado ao carrinho",
+    message: "Produto adicionado ao carrinho.",
     cartItem,
   };
 };

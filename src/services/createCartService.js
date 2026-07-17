@@ -7,13 +7,11 @@ export const createCartService = async (userId) => {
   const cartRepository = AppDataSource.getRepository(Cart);
 
   const user = await userRepository.findOne({
-    where: {
-      id: userId,
-    },
+    where: { id: userId },
   });
 
   if (!user) {
-    throw new Error("Usuario nao encontrado");
+    throw new Error("Usuário não encontrado");
   }
 
   const cart = cartRepository.create({
@@ -23,9 +21,5 @@ export const createCartService = async (userId) => {
 
   await cartRepository.save(cart);
 
-  return {
-    id: cart.id,
-    status: cart.status,
-    created_at: cart.created_at,
-  };
+  return cart;
 };

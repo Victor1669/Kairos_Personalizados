@@ -12,6 +12,11 @@ export default new EntitySchema({
     size: { type: "simple-array", nullable: false },
     price: { type: "decimal", precision: 10, scale: 2 },
     description: { type: "varchar" },
+    status: {
+      type: "enum",
+      enum: ["ativo", "inativo"],
+      default: "ativo",
+    },
   },
 
   relations: {

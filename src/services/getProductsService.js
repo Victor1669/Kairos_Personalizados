@@ -19,5 +19,6 @@ export const getProductsService = async () => {
     size: product.size,
     price: product.price,
     image: product.images.sort((a, b) => a.order - b.order)[0]?.img_url ?? null,
+    status: product.status,
   }));
 };

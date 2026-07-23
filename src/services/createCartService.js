@@ -7,11 +7,26 @@ export const createCartService = async (userId) => {
   const cartRepository = AppDataSource.getRepository(Cart);
 
   const user = await userRepository.findOne({
-    where: { id: userId },
+    where: {
+      id: userId,
+    },
   });
 
   if (!user) {
     throw new Error("Usuário não encontrado");
+  }
+
+  const existingCart = await cartRepository.findOne({
+    where: {
+      user: {
+        id: userId,
+      },
+      status: "ativo",
+    },
+  });
+
+  if (existingCart) {
+    return existingCart;
   }
 
   const cart = cartRepository.create({
@@ -19,7 +34,5 @@ export const createCartService = async (userId) => {
     status: "ativo",
   });
 
-  await cartRepository.save(cart);
-
-  return cart;
+  return await cartRepository.save(cart);
 };

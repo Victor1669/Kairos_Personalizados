@@ -18,7 +18,9 @@ export const addCartItemService = async (
   const cartItemRepository = AppDataSource.getRepository(CartItem);
 
   const user = await userRepository.findOne({
-    where: { id: userId },
+    where: {
+      id: userId,
+    },
   });
 
   if (!user) {
@@ -26,7 +28,9 @@ export const addCartItemService = async (
   }
 
   const product = await productRepository.findOne({
-    where: { id: productId },
+    where: {
+      id: productId,
+    },
   });
 
   if (!product) {
@@ -39,9 +43,6 @@ export const addCartItemService = async (
         id: userId,
       },
       status: "ativo",
-    },
-    relations: {
-      user: true,
     },
   });
 

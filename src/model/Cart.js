@@ -11,7 +11,7 @@ export default new EntitySchema({
     },
     status: {
       type: "enum",
-      enum: ["ativo", "finalizado", "abandonado"],
+      enum: ["ativo", "finalizado"],
       default: "ativo",
     },
     created_at: {

@@ -38,4 +38,3 @@ router.get("/", getProductsController);
 router.get("/:id", getProductByIdController);
 
 export default router;
-//test

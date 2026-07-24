@@ -1,4 +1,5 @@
 import AppDataSource from "../config/dbconnect.js";
+import { sendWelcomeEmailService } from "../services/sendWelcomeEmailService.js";
 import User from "../model/User.js";
 import bcrypt from "bcrypt";
 
@@ -46,6 +47,13 @@ export const registerService = async (data) => {
   });
 
   await userRepository.save(newUser);
+
+  sendWelcomeEmailService({
+    email: newUser.email,
+    name: newUser.name,
+  }).catch((error) => {
+    console.error("Erro ao enviar e-mail de boas-vindas:", error);
+  });
 
   return {
     message: "Usuário cadastrado com sucesso.",

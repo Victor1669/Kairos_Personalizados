@@ -13,7 +13,9 @@ export const getCartService = async (userId) => {
     },
     relations: {
       items: {
-        product: true,
+        product: {
+          images: true,
+        },
       },
     },
   });

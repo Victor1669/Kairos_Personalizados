@@ -21,7 +21,6 @@ app.use("/addresses", addressRoutes);
 app.use("/products", productRoutes);
 app.use("/cart", cartRoutes);
 app.use("/review", reviewRoutes);
-
 const PORT = process.env.PORT;
 
 AppDataSource.initialize()

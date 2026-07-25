@@ -54,7 +54,6 @@ export const registerService = async (data) => {
   }).catch((error) => {
     console.error("Erro ao enviar e-mail de boas-vindas:", error);
   });
-
   return {
     message: "Usuário cadastrado com sucesso.",
   };

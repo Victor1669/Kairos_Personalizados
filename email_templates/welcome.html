@@ -3,37 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <title>Kairos Gráfica - Boas-vindas</title>
+
     <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
       body {
         margin: 0;
         padding: 0;
         font-family: Arial, sans-serif;
         background-color: #f5f5f5;
       }
-      .header {
+
+      .content {
+        background-color: white;
+        padding: 30px;
+      }
+
+      .content p {
+        line-height: 1.6;
+        margin-bottom: 15px;
+        color: #333;
+      }
+
+      .content strong {
+        color: #b8860b;
+      }
+
+      header {
         background-color: #000000;
         padding: 15px;
         text-align: center;
       }
+
+      header h1 {
+        color: white;
+        margin: 0;
+      }
+
+      article {
+        margin: 30px;
+      }
+
       .logo {
         display: block;
         margin: 0 auto;
         max-width: 140px;
         height: auto;
       }
-      .content {
-        padding: 30px;
-        background-color: white;
-      }
-      .content p {
-        line-height: 1.6;
-        margin-bottom: 15px;
-        color: #333;
-      }
-      .content strong {
-        color: #b8860b;
-      }
-      .footer {
+
+      footer {
         padding: 20px;
         text-align: center;
         font-size: 12px;
@@ -41,30 +63,45 @@
       }
     </style>
   </head>
+
   <body>
-    <header>
-      <h1>Bem-vindo</h1>
-    </header>
-    <div class="content">
-      <p>Olá {{name}},</p>
-      <p>Seja muito bem-vindo à <strong>Kairos Gráfica</strong>! 🎉</p>
-      <p>Estamos muito felizes em ter você por aqui.</p>
-      <p>
-        Agora você pode explorar nossos produtos personalizados e criar algo
-        único, feito especialmente para você.
-      </p>
-      <p>
-        Esperamos que tenha uma ótima experiência com a
-        <strong>Kairos Gráfica</strong>!
-      </p>
-      <p>
-        Atenciosamente, <br />
-        <strong>Equipe Kairos Gráfica</strong>
-      </p>
-    </div>
-    <div class="footer">
+    <main>
+      <section class="content">
+        <header>
+          <h1>Bem-vindo</h1>
+        </header>
+
+        <article>
+          <p>Olá {{name}},</p>
+
+          <p>
+            Seja muito bem-vindo à
+            <strong>Kairos Gráfica</strong>! 🎉
+          </p>
+
+          <p>Estamos muito felizes em ter você por aqui.</p>
+
+          <p>
+            Agora você pode explorar nossos produtos personalizados e criar algo
+            único, feito especialmente para você.
+          </p>
+
+          <p>
+            Esperamos que tenha uma ótima experiência com a
+            <strong>Kairos Gráfica</strong>!
+          </p>
+
+          <p>
+            Atenciosamente, <br />
+            <strong>Equipe Kairos Gráfica</strong>
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <footer>
       <p>© 2026 Kairos Gráfica</p>
       <p>Este é um e-mail automático, não responda.</p>
-    </div>
+    </footer>
   </body>
 </html>

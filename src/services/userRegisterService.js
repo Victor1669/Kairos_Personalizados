@@ -12,28 +12,22 @@ export const registerService = async (data) => {
     throw new Error("Todos os campos devem ser preenchidos.");
   }
 
-  const emailExists = await userRepository.findOne({
-    where: { email },
+  const existingUser = await userRepository.findOne({
+    where: [{ email }, { cpf }, { phone }],
   });
 
-  if (emailExists) {
-    throw new Error("Este e-mail já está cadastrado.");
-  }
+  if (existingUser) {
+    if (existingUser.email === email) {
+      throw new Error("Este e-mail já está cadastrado.");
+    }
 
-  const cpfExists = await userRepository.findOne({
-    where: { cpf },
-  });
+    if (existingUser.cpf === cpf) {
+      throw new Error("Este CPF já está cadastrado.");
+    }
 
-  if (cpfExists) {
-    throw new Error("Este CPF já está cadastrado.");
-  }
-
-  const phoneExists = await userRepository.findOne({
-    where: { phone },
-  });
-
-  if (phoneExists) {
-    throw new Error("Este telefone já está cadastrado.");
+    if (existingUser.phone === phone) {
+      throw new Error("Este telefone já está cadastrado.");
+    }
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -54,6 +48,7 @@ export const registerService = async (data) => {
   }).catch((error) => {
     console.error("Erro ao enviar e-mail de boas-vindas:", error);
   });
+
   return {
     message: "Usuário cadastrado com sucesso.",
   };

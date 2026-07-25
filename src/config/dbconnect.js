@@ -17,6 +17,10 @@ const AppDataSource = new DataSource({
 
   entities: ["src/model/*.js"],
   migrations: ["src/migrations/*.cjs"],
+
+  extra: {
+    connectionLimit: 10,
+  },
 });
 
 export default AppDataSource;

@@ -19,6 +19,7 @@ export const updateCartItemQuantityService = async (
       user: {
         id: userId,
       },
+      status: "ativo",
     },
   });
 
